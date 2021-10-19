@@ -1,7 +1,8 @@
 let url = "http://localhost:8080/userTable/all";
 llamada(url);
 function callApi() {
-  let url = "http://localhost:8080/userTable/allSorted";
+	orderBy = document.getElementById("usersCombo").value;
+  let url = "http://localhost:8080/userTable/all/sort/"+orderBy;
   llamada(url);
 }
 function calearFilters() {

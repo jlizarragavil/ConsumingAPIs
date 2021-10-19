@@ -3,8 +3,14 @@
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
+	  <label>Order By:</label>
+	  <select id="usersCombo">
+		<option value="name">Name</option>
+		<option value="id">Id</option>
+		<option value="age">Age</option>
+	  </select><br/><br/>
     <button onclick="callApi()">Sort</button>
-    <button onclick="calearFilters()">Clear filters</button><br /><br />
+    <button onclick="calearFilters()">Clear filters</button><br/><br/>
     <table id="tabla">
       <thead>
         <th>Nombre</th>

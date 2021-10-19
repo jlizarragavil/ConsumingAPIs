@@ -24,15 +24,28 @@ public class UserTable {
 	
 	@CrossOrigin
 	@GetMapping("/all")
-	public List<User> getUsers(){		
-		//users.sort((o1, o2) -> o1.getId().compareTo(o2.getId()));		
+	public List<User> getUsers(){			
 		return users;
 	}
 	@CrossOrigin
-	@GetMapping("/allSorted")
-	public List<User> getUsersSorted(){
+	@GetMapping("/all/sort/name")
+	public List<User> getUsersSortedByName(){
 		List<User> usersSorted = new UserExample().getUserExample();
 		usersSorted.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));		
+		return usersSorted;
+	}
+	@CrossOrigin
+	@GetMapping("/all/sort/id")
+	public List<User> getUsersSortedById(){
+		List<User> usersSorted = new UserExample().getUserExample();
+		usersSorted.sort((o1, o2) -> o1.getId().compareTo(o2.getId()));		
+		return usersSorted;
+	}
+	@CrossOrigin
+	@GetMapping("/all/sort/age")
+	public List<User> getUsersSortedByAge(){
+		List<User> usersSorted = new UserExample().getUserExample();	
+		usersSorted.sort((o1, o2) -> Integer.compare(o1.getAge(), o2.getAge()));	
 		return usersSorted;
 	}
 	
