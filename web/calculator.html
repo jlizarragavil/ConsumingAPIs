@@ -1,0 +1,50 @@
+<html>
+	<head>
+	</head>
+	<body>
+		
+		<label>First number:</label><br>
+		<input type="text" id="fnum"/><br><br>
+		<label>Second number:</label><br>
+		<input type="text" id="snum"/><br><br>
+
+
+		<input type="radio" id="A" name="drone" value="add" checked>
+		<label for="add">Add</label>
+
+		<input type="radio" id="S" name="drone" value="substract">
+		<label for="substract">Substract</label>
+
+		<input type="radio" id="M" name="drone" value="multiply">
+		<label for="multiply">Multiply</label>
+
+		<input type="radio" id="D" name="drone" value="divide">
+		<label for="divide">Divide</label>
+
+		<br><br><button onclick="callApi()"> submit </button>
+		
+		<p id="demo"></p>
+		<script>
+			function callApi(){
+				const rbs = document.querySelectorAll('input[name="drone"]');
+				let selectedId;
+				for (const rb of rbs) {
+					if (rb.checked) {
+						selectedId = rb.id;
+						break;
+					}
+				}
+				let url = 'http://localhost:8080/operation/'+document.getElementById("fnum").value+'/'+document.getElementById("snum").value+'/'+selectedId
+				console.log(url)
+				fetch(url)
+				.then(response => response.json())
+				.then(function(data){
+				console.log(data)
+					let a = data.result
+					document.getElementById("demo").innerHTML = a;
+				})
+			}
+			
+		</script>
+	</body>
+</html>
