@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,26 +29,22 @@ public class UserTable {
 		return users;
 	}
 	@CrossOrigin
-	@GetMapping("/all/sort/name")
-	public List<User> getUsersSortedByName(){
+	@GetMapping("/all/sort/{option}")
+	public List<User> getUsersSorted(@PathVariable("option") String option){
 		List<User> usersSorted = new UserExample().getUserExample();
-		usersSorted.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));		
+		switch (option){
+			case "id":
+				usersSorted.sort((o1, o2) -> o1.getId().compareTo(o2.getId()));
+				break;
+			case "name":
+				usersSorted.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+				break;
+			case "age":
+				usersSorted.sort((o1, o2) -> Integer.compare(o1.getAge(), o2.getAge()));
+				break;
+			default:
+				break;
+		}
 		return usersSorted;
 	}
-	@CrossOrigin
-	@GetMapping("/all/sort/id")
-	public List<User> getUsersSortedById(){
-		List<User> usersSorted = new UserExample().getUserExample();
-		usersSorted.sort((o1, o2) -> o1.getId().compareTo(o2.getId()));		
-		return usersSorted;
-	}
-	@CrossOrigin
-	@GetMapping("/all/sort/age")
-	public List<User> getUsersSortedByAge(){
-		List<User> usersSorted = new UserExample().getUserExample();	
-		usersSorted.sort((o1, o2) -> Integer.compare(o1.getAge(), o2.getAge()));	
-		return usersSorted;
-	}
-	
-	
 }
